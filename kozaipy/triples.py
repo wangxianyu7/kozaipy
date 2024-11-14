@@ -262,22 +262,22 @@ class TripleSolution(object):
             # data supplied at once as a matrix
             self.vectordata.time = vector_solution[:,0] 
             
-            print('\nNumerical solution carried out for:')
+            #print('\nNumerical solution carried out for:')
             for key,val in self.vectordata.__dict__.items():
                 if key not in triple_keys: continue
                 if (key == 'time'): continue
                 if triple_keys[key] is not None:
-                    print(key,)
+                    #print(key,)
                     setattr(self.vectordata, key,  vector_solution[:,1+triple_keys[key]])
                     
         if (vector_derivatives is not None):
             nquant = vector_solution.shape[1]
-            print('\nTime derivatives availabile for:')
+            #print('\nTime derivatives availabile for:')
             for key,val in self.vectordata.__dict__.items():
                 if key not in triple_derivative_keys: continue
                 related_key = key[1:-3]
                 if triple_derivative_keys[key] is not None:
-                    print(related_key,)
+                    #print(related_key,)
                     setattr(self.vectordata, key,  vector_derivatives[:,triple_derivative_keys[key]-nquant])
 
 
@@ -917,7 +917,7 @@ class Triple(object):
         """
 
         #self.check_validity_bodies()
-        print(self.Omega0)
+        #print(self.Omega0)
         vector_ics = self.set_ics(spin_vector=solve_for_spin_vector)
 
         
@@ -979,8 +979,8 @@ def read_file(filename):
     masses=[]
     for h in header:
         masses.append(float(h.split('=')[1]))
-    print(masses)
-    print(columns)
+    #print(masses)
+    #print(columns)
     sol = TripleSolution(Triple=Triple(m0=masses[0],m1=masses[1],m2=masses[2]))
     data = np.loadtxt(filename)
     
